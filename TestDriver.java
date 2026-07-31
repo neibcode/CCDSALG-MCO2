@@ -1,5 +1,7 @@
 public class TestDriver {
     public static void main(String[] args) {
-        new MainMenu(); //Loads the MainMenu
+        MainMenu mainMenu = new MainMenu();
+        Maze mazeView = new Maze(1 ,1);
+        TestController test = new TestController(mainMenu, mazeView);
     }
 }

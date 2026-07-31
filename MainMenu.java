@@ -1,33 +1,106 @@
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
-public class MainMenu extends JFrame{
+public class MainMenu extends JPanel{
+    final Dimension appDimension = new Dimension(600, 600);
+    JButton startButton, loadButton, exitButton;
     public MainMenu(){
-        //Settings for The Main Frame
-        this.setTitle("MCO2 - MAZE");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setSize(600, 600);
+        this.setLayout(null);
+        this.setBackground(Color.black);
+        
+        //Title
+        JPanel titlePanel = new JPanel();
+        titlePanel.setOpaque(true);
+        titlePanel.setBounds(0, 0, appDimension.width, appDimension.height/3);
+        //titlePanel.setBackground(Color.yellow);
+        titlePanel.setOpaque(false);
+        this.add(titlePanel);
+
+        ImageIcon logo = new ImageIcon("Logo.png");
+        float scaleFactor = 0.11f;
+        Image scaledLogo = logo.getImage().getScaledInstance((int)(3840 * scaleFactor), (int)(2160 * scaleFactor), Image.SCALE_SMOOTH);
+        JLabel title = new JLabel(new ImageIcon(scaledLogo));
+        title.setHorizontalAlignment(JLabel.CENTER);
+        titlePanel.add(title);
         
 
-        //Items inside the Main Frame
-        JLabel titleText = new JLabel("MCO2 - MAZE");
-        titleText.setHorizontalAlignment(JLabel.CENTER);
-        titleText.setFont(new Font("Impact", Font.PLAIN, 100));
-        this.add(titleText);
+        //Buttons
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBounds(0, appDimension.height/3, appDimension.width, (appDimension.height/3) * 2);
+        buttonsPanel.setBorder(new EmptyBorder(60, appDimension.width/4, 80, appDimension.width/4));
+        buttonsPanel.setLayout(new GridLayout(3, 1, 0, 20));
+        //buttonsPanel.setBackground(Color.red);
+        buttonsPanel.setOpaque(false);
+        this.add(buttonsPanel);
         
+        //Start Button
+        startButton = new JButton("START MAZE");
+        startButton.setForeground(Color.white);
+        startButton.setActionCommand("START");
+        this.disableStartButton();
+        buttonsPanel.add(startButton);
+        //startButton.addActionListener(this);
 
-        /*
-        //Cool GIF Moving
-        JLabel gif = new JLabel(new ImageIcon("Something.gif"));
-        this.add(gif);
+        //Load Button
+        loadButton = new JButton("LOAD MAZE");
+        loadButton.setBackground(Color.red);
+        loadButton.setForeground(Color.white);
+        loadButton.setActionCommand("LOAD");
+        buttonsPanel.add(loadButton);
+        //loadButton.addActionListener(this);
 
-        //Changes Application Icon
-        ImageIcon icon = new ImageIcon("Logo.png");
-        this.setIconImage(icon.getImage());
-         */
+        //Exit Button
+        exitButton = new JButton("EXIT MAZE");
+        exitButton.setBackground(Color.red);
+        exitButton.setForeground(Color.white);
+        exitButton.setActionCommand("EXIT");
+        buttonsPanel.add(exitButton);
+        //exitButton.addActionListener(this);
+    }
 
-        this.setVisible(true);
+    public void addMenuListener(ActionListener listenerForMenu){
+
+        startButton.addActionListener(listenerForMenu);
+        loadButton.addActionListener(listenerForMenu);
+        exitButton.addActionListener(listenerForMenu);
+        /* 
+        if (e.getSource() == startButton){
+            //When startButton is clicked
+            System.out.println("START BUTTON clicked");
+            this.setContentPane(new Maze(this::showMainMenu, "ABC"));
+
+            revalidate();
+            repaint();
+        }else if(e.getSource() == loadButton){
+            //When loadButton is clicked
+            System.out.println("LOAD BUTTON clicked");
+
+
+            revalidate();
+            repaint();
+        }else if(e.getSource() == exitButton){
+            //When loadButton is clicked
+            System.out.println("EXIT BUTTON clicked");
+
+
+            revalidate();
+            repaint();
+            System.exit(0);
+        }
+        */
+        
+    }
+
+    public void enableStartButton(){
+        startButton.setBackground(Color.red);
+        startButton.setEnabled(true);
+    }
+
+    public void disableStartButton(){
+        startButton.setBackground(new Color(255, 0, 0, 128));
+        startButton.setEnabled(false);
     }
 }
