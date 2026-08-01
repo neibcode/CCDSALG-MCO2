@@ -1,0 +1,7 @@
+# Compiled Java class files
+*.class
+
+# IDE configuration folders
+.vscode/
+.idea/
+*.iml
