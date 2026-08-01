@@ -38,11 +38,12 @@ public class GUI extends JFrame{
 
     public void showMenu(){
         cardLayout.show(cards, "MENU");
-        System.out.println("I WAS CALLED");
     }
 
-    public void showMaze(){
+    public void showMaze(String[] tileMap, int rows, int columns){
         cardLayout.show(cards, "MAZE");
+        
+        maze.loadMap(tileMap, rows, columns);
     }
 
     public MainMenu getMenu(){

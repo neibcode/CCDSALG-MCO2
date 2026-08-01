@@ -66,31 +66,6 @@ public class MainMenu extends JPanel{
         startButton.addActionListener(listenerForMenu);
         loadButton.addActionListener(listenerForMenu);
         exitButton.addActionListener(listenerForMenu);
-        /* 
-        if (e.getSource() == startButton){
-            //When startButton is clicked
-            System.out.println("START BUTTON clicked");
-            this.setContentPane(new Maze(this::showMainMenu, "ABC"));
-
-            revalidate();
-            repaint();
-        }else if(e.getSource() == loadButton){
-            //When loadButton is clicked
-            System.out.println("LOAD BUTTON clicked");
-
-
-            revalidate();
-            repaint();
-        }else if(e.getSource() == exitButton){
-            //When loadButton is clicked
-            System.out.println("EXIT BUTTON clicked");
-
-
-            revalidate();
-            repaint();
-            System.exit(0);
-        }
-        */
         
     }
 
