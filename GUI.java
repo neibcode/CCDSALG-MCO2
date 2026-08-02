@@ -1,12 +1,9 @@
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame{
     final Dimension appDimension = new Dimension(600, 600);
-    JButton startButton, loadButton, exitButton;
 
     private CardLayout cardLayout;
     private JPanel cards;
@@ -19,6 +16,7 @@ public class GUI extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(appDimension);
+        this.setLocationRelativeTo(null);
         this.setBackground(Color.black);
 
         cardLayout = new CardLayout();
@@ -40,10 +38,10 @@ public class GUI extends JFrame{
         cardLayout.show(cards, "MENU");
     }
 
-    public void showMaze(String[] tileMap, int rows, int columns){
+    public void showMaze(MazeGrid mzGrid){
         cardLayout.show(cards, "MAZE");
         
-        maze.loadMap(tileMap, rows, columns);
+        maze.loadMap(mzGrid);
     }
 
     public MainMenu getMenu(){

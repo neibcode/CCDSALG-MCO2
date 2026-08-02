@@ -11,9 +11,6 @@ public class Maze extends JPanel{
     private int rowCount;
     private int columnCount;
     private int tileSize;
-    private int boardWidth;
-    private int boardHeight;
-    private String[] tileMap;
 
     private Image characterImage;
     private Image characterUp;
@@ -93,46 +90,36 @@ public class Maze extends JPanel{
     }
 
     //Updates the hash and items inside?
-    public void loadMap(String[] tileMap, int rows, int columns){
-        this.tileMap = tileMap;
+    public void loadMap(MazeGrid mazeGrid){
         characterImage = characterRight;
 
-        this.rowCount = tileMap.length;
-        this.columnCount = columns;
-        boardWidth = columnCount * tileSize;
-        boardHeight = rowCount * tileSize;
+        this.rowCount = mazeGrid.getRows();
+        this.columnCount = mazeGrid.getCols();
+        System.out.println("ROW: " + rowCount + ", COL: " + columnCount);
 
         walls = new HashSet<Block>();
-        
-        
-        
+
         int baseX = (int)(appDimension.width / 2) - (tileSize * (columnCount / 2));
-        int baseY = (int) (appDimension.height/3);
-        //System.out.println("WIDTH/2: " + appDimension.width / 2 + ", COLUMNS: " + columnCount);
-        //System.out.println("HEIGHT/6: " + appDimension.height / 6 + ", ROWS: " + rowCount);
-        //System.out.println("X: " + baseX + ", Y: " + baseY);
+        int baseY = (int) (appDimension.height / 3) - (tileSize * (rowCount / 2));
 
         for(int r = 0; r < rowCount; r++){
-            for(int c = 0; c < tileMap[r].length(); c++){
-                String row = tileMap[r];
-                char tileMapChar = row.charAt(c);
+           for(int c = 0; c < columnCount; c++){
+                Cell tile = mazeGrid.getCell(r, c);
 
                 int x = baseX + (c * tileSize);
                 int y = baseY + (r * tileSize);
-                
 
-                if(tileMapChar == '#'){
+                if(tile == Cell.WALL){
                     Block wall = new Block(null, x, y, tileSize, tileSize);
                     walls.add(wall);
-                }else if(tileMapChar == 'S'){
+                } else if(tile == Cell.START){
                     character = new Block(null, x, y, tileSize, tileSize);
-                }else if(tileMapChar == 'G'){
+                } else if(tile == Cell.GOAL){
                     goal = new Block(null, x, y, tileSize, tileSize);
                 }
             }
         }
 
-        
         System.out.println("WALLS: " + walls.size());
         System.out.println(character);
         System.out.println(goal);

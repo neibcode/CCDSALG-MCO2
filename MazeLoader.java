@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 // MazeLoader: reads a maze .txt file (per spec Section 2.3) and builds a
 // MazeGrid from it. File format:
@@ -43,7 +42,7 @@ public class MazeLoader {
             }
 
             reader.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error reading maze file: " + e.getMessage());
             grid = null;
         }
