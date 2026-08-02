@@ -5,7 +5,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TestController {
+public class Controller {
     private javax.swing.Timer animationTimer;
     private MainMenu mainMenu = new MainMenu();
     private Maze mazeView = new Maze();
@@ -15,7 +15,7 @@ public class TestController {
     private MazeGrid mzGrid;
 
 
-    public TestController(){
+    public Controller(){
         this.gui = new GUI(mainMenu, mazeView);
 
         this.mainMenu.addMenuListener(new MenuListener());
