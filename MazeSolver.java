@@ -8,12 +8,14 @@ public class MazeSolver {
     private VisitedMatrix visited;
     private ParentMap parents;
     private SimulationMetrics metrics;
+    private CustomQueue<Position> explorationOrder;
 
     public MazeSolver(MazeGrid grid) {
         this.grid = grid;
         this.visited = new VisitedMatrix(grid.getRows(), grid.getCols());
         this.parents = new ParentMap(grid.getRows(), grid.getCols());
         this.metrics = new SimulationMetrics();
+        this.explorationOrder = new CustomQueue<>();
     }
 
     // Non-void method: single return at the very end.
@@ -35,6 +37,7 @@ public class MazeSolver {
         while (!frontier.isEmpty() && !goalFound) {
             Position current = frontier.dequeue();
             metrics.incrementSteps();
+            explorationOrder.enqueue(current);
 
             if (current.row == goal.row && current.col == goal.col) {
                 goalFound = true;
@@ -93,5 +96,14 @@ public class MazeSolver {
 
     public SimulationMetrics getMetrics() {
         return this.metrics;
+    }
+
+    // Non-void method: single return at the very end.
+    // Returns every cell in the order it was visited during the search
+    // (dead ends included), for animating the full search process -- as
+    // opposed to solve()'s returned CustomStack, which is only the final
+    // shortest path.
+    public CustomQueue<Position> getExplorationOrder() {
+        return this.explorationOrder;
     }
 }
