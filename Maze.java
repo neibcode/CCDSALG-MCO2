@@ -53,7 +53,7 @@ public class Maze extends JPanel{
 
         this.setLayout(null);
         this.setBackground(Color.black);
-        this.tileSize = 225/15;
+        this.tileSize = 10;
 
         //Button Panel
         JPanel buttonsPanel = new JPanel();
