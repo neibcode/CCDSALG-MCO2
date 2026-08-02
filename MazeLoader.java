@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 // MazeLoader: reads a maze .txt file (per spec Section 2.3) and builds a
 // MazeGrid from it. File format:
@@ -34,15 +35,22 @@ public class MazeLoader {
                 cols = Integer.parseInt(reader.readLine().trim());
             }
 
-            grid = new MazeGrid(rows, cols);
+            boolean validDimensions = (rows >= 15 && rows <= 30 && cols >= 15 && cols <= 30);
 
-            for (int row = 0; row < rows; row++) {
-                String line = reader.readLine();
-                parseRow(grid, line, row, cols);
+            if (validDimensions) {
+                grid = new MazeGrid(rows, cols);
+
+                for (int row = 0; row < rows; row++) {
+                    String line = reader.readLine();
+                    parseRow(grid, line, row, cols);
+                }
+            } else {
+                System.out.println("Error: Maze dimensions must be between 15 and 30 "
+                        + "(got " + rows + " x " + cols + ").");
             }
 
             reader.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Error reading maze file: " + e.getMessage());
             grid = null;
         }
