@@ -53,7 +53,6 @@ public class Maze extends JPanel{
 
         this.setLayout(null);
         this.setBackground(Color.black);
-        this.tileSize = 10;
 
         //Button Panel
         JPanel buttonsPanel = new JPanel();
@@ -95,6 +94,7 @@ public class Maze extends JPanel{
 
         this.rowCount = mazeGrid.getRows();
         this.columnCount = mazeGrid.getCols();
+        this.tileSize = (appDimension.height/2)/(Math.max(rowCount, columnCount));
         System.out.println("ROW: " + rowCount + ", COL: " + columnCount);
 
         walls = new HashSet<Block>();
